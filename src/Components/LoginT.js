@@ -9,23 +9,27 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 const LoginT = () => {
+  const lflag = useSelector((state) => state.Log.lflag);
+  const name = useSelector((state) => state.Log.loggedUser?.name);
   const navigate = useNavigate();
 
   // const { DispatchUserEvent } = useContext(AppContext);
   return (
     <div className="logint">
-      <div className="logint__i">
-        <h2>New customer</h2>
-        <p
-          className="pointer"
-          onClick={() => {
-            // DispatchUserEvent("SET_SIGNUPFLAG");
-            navigate("/SignUp");
-          }}
-        >
-          Signup
-        </p>
-      </div>
+      {lflag ?  <div className="logint__i">
+           <h2>{name}</h2> </div>
+        : <div className="logint__i">
+          <h2>New customer</h2>
+          <p
+            className="pointer"
+            onClick={() => {
+              // DispatchUserEvent("SET_SIGNUPFLAG");
+              navigate("/SignUp");
+            }}
+          >
+            Signup
+          </p>
+        </div> }
       <hr />
       <div className="logint__in">
         <AccountCircleIcon />

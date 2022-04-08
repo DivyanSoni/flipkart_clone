@@ -6,13 +6,13 @@ import counterReducer from "./counter";
 import { combineReducers } from "redux";
 import Users from "./Users";
 import Log from "./logged";
+import Cart from "./Cart";
 
 const RootReducers = combineReducers({
   //   myCount: counterReducer,
   Users: Users,
-    Log: Log
-  //   addedItem: add_To_Cart,
-  // detailViewer: DetailViewer,
+  Log: Log,
+   Cart:Cart
 });
 
 export default RootReducers;

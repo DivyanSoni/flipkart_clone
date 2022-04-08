@@ -15,6 +15,7 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 // import AppContext from "../Contexts/MyContext";
 import { useDispatch, useSelector } from "react-redux";
 import { AddUser } from "../actions";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Copyright(props) {
   return (
@@ -36,10 +37,12 @@ export default function SignUp() {
 
   const Users = useSelector((state) => state);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     let user = {
+      id: Date.now(),
       name: data.get("firstName") + " " + data.get("lastName"),
       email: data.get("email"),
       phone: data.get("phone"),
@@ -47,7 +50,8 @@ export default function SignUp() {
     };
     // let datas = [...Users];
     //  datas.push(user);
-    dispatch(AddUser(user));
+    dispatch(AddUser(user)); 
+    navigate("/");
   };
   console.log(Users, "Users1231");
   return (
@@ -68,7 +72,7 @@ export default function SignUp() {
           <Typography component="h1" variant="h5">
             Sign up
           </Typography>
-          <Box component="form" noValidate onSubmit={(e) => handleSubmit(e)} sx={{ mt: 3 }}>
+          <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
             <Grid container spacing={2}>
               <Grid item xs={12} sm={6}>
                 <TextField

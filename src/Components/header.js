@@ -10,12 +10,15 @@ import LoginT from "./LoginT";
 import SignInSide from "./SignIn";
 import "tippy.js/themes/light.css";
 import { Link, useNavigate } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import {resetFlag, setBeforeLogout} from "../actions/index"
 
 function Header() {
   // const { DispatchUserEvent } = useContext(AppContext);
-  const { state } = useSelector((state) => state.Users.loginData);
-  console.log("state in header", state);
+  const lflag = useSelector((state) => state.Log.lflag);
+  const loggedUser = useSelector((state) => state.Log.loggedUser);
+  const Cart = useSelector((state) => state.Cart);
+  const dispatch = useDispatch();
   const navigate = useNavigate();
   return (
     <div className="header">
@@ -61,17 +64,26 @@ function Header() {
           offset={[5, 18]}
           animation="perspective"
         >
-          <button
-            className="tp"
-            onClick={() => {
-              navigate("SignInSide");
-            }}
-          >
-            Login
-          </button>
-          {/* <Link to="Login" className="tp" value="Login">
-            Login
-          </Link> */}
+          {lflag ? (
+            <button
+              className="tp"
+              onClick={() => {
+                dispatch(resetFlag());
+                dispatch(setBeforeLogout({ id:loggedUser.id ,Cart:Cart}))
+              }}
+            >
+              Logout
+            </button>
+          ) : (
+            <button
+              className="tp"
+              onClick={() => {
+                navigate("SignInSide");
+              }}
+            >
+              Login
+            </button>
+          )}
         </Tippy>
       </div>
       <div className="header_fourth">
@@ -87,7 +99,9 @@ function Header() {
         </Tippy>
         <ExpandMoreIcon />
       </div>
-      <div className="header_fifth">
+      <div className="header_fifth" onClick={() => {
+        navigate("CartItems");
+      }}>
         <ShoppingCartIcon />
         <p>Cart</p>
       </div>

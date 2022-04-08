@@ -43,15 +43,15 @@ export default function SignInSide() {
     const data = new FormData(event.currentTarget);
     console.log("mydata", Users);
     // const mydata = Users;
-    let res = Users.find((u) => {
+    let user = Users.find((u) => {
       if (data.get("email") === u.email && data.get("password") === u.password) {
         console.log("in if ");
         return u;
       }
     });
-    console.log("in  after if ", res);
-    dispatch(setFlag());
-    dispatch(logUser(res));
+    console.log("in  after if ", user);
+    dispatch(setFlag({user}));
+    // dispatch(logUser(res));
     navigate("/");
   };
 

@@ -18,7 +18,13 @@ export const decrement = () => {
 };
 export const addToCart = (newItem) => {
   return {
-    type: "ADD_TO_CART",
+    type: "ADD_ITEM",
+    payload: newItem,
+  };
+};
+export const removeFromCart = (newItem) => {
+  return {
+    type: "REMOVE_ITEM",
     payload: newItem,
   };
 };
@@ -36,10 +42,17 @@ export const AddUser = (user) => {
     payload: user,
   };
 };
-export const setFlag = () => {
+export const setBeforeLogout= (data) => {
+  // console.log(user, "check datata acacacaca");
+  return {
+    type: "SET_BEFORE_LOGOUT",
+    payload: data
+  };
+};
+export const setFlag = (data) => {
   return {
     type: "SETFLAG",
-    // payload: num
+     payload: data.user
   };
 };
 export const resetFlag = () => {
@@ -54,3 +67,11 @@ export const logUser = (userdata) => {
     payload: userdata,
   };
 };
+
+export const setViewProduct = (data) => {
+  return {
+    type: "SET_VIEWPRODUCT",
+    payload: data,
+  };
+};
+

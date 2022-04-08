@@ -3,12 +3,12 @@ const initialstate = {
     lflag: false,
     loggedUser:{}
 }
- const Log = (state=initialstate,action) => {
+const Log = (state = { ...initialstate },action) => {
     switch (action.type) {
       case "SETFLAG":
-        return { ...state, lflag: true };
+        return { ...state, lflag: true ,loggedUser:action.payload};
       case "RESETFLAG":
-            return { ...state, lflag: false };
+            return { lflag: false ,loggedUser:{} };
         case "LOGGEDUSER":
            return {...state,loggedUser:action.payload} 
         default:

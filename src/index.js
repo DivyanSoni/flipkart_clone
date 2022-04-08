@@ -3,10 +3,13 @@ import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
 import reportWebVitals from "./reportWebVitals";
-import store, { persistor } from "./store/store";
+import store from "./store/store";
 import { Provider } from "react-redux";
-import { PersistGate } from "redux-persist/integration/react";
-import { BrowserRouter} from "react-router-dom";
+import { persistStore } from "redux-persist";
+import {PersistGate } from "redux-persist/integration/react";
+import { BrowserRouter } from "react-router-dom";
+
+let persistor = persistStore(store);
 
 ReactDOM.render(
   <BrowserRouter>

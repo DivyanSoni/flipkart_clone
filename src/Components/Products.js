@@ -1,17 +1,22 @@
 import data from "../data/products";
 import React from 'react';
+import { useDispatch } from "react-redux";
+import { addToCart, setViewProduct } from "../actions/index"
+import ShoppingCartCheckoutIcon from "@mui/icons-material/ShoppingCartCheckout";
+import { Navigate, useNavigate } from "react-router-dom";
 
 function Products() {
-    const print = () => {
-      return
-     }
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   return (
     <div className="container" style={{ display: "flex", flexWrap: "wrap", flexDirection: "row" }}>
       {data.map((elem) => {
         return (
-          <div className=" col-lg-2 col-md-3 col-sm-6 my-2 px-3" style={{ display: "flex", flexWrap: "wrap" }}>
+          <div className=" col-lg-2 col-md-3 col-sm-6 my-2 px-3" style={{ display: "flex", flexWrap: "wrap" }}
+             >
             <center>
               <img
+                // className="img-fluid"
                 src={elem.image}
                 width="120px"
                 height="120px"
@@ -23,9 +28,20 @@ function Products() {
                   alignItem: "center",
                   margin: "auto",
                 }}
+                onClick={() => {
+                  navigate("ViewProduct");
+              dispatch(setViewProduct(elem));
+              console.log("div clicked");
+            }}
               />
-              <button className="btn btn-outline-success btn-sm" style={{ width: "120px" }}>
-                Add to Cart
+              <button
+                className="btn btn-outline-success btn-sm"
+                style={{ width: "120px" }}
+                onClick={() => {
+                  dispatch(addToCart(elem));
+                }}
+              >
+                <ShoppingCartCheckoutIcon /> Add to Cart
               </button>
             </center>
             <div style={{ fontSize: "14px" }}>Category - {elem.category.toUpperCase()}</div>
