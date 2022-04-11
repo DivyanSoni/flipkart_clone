@@ -22,7 +22,7 @@ const ViewProduct = () => {
               <b>Description - </b> {data.description}{" "}
             </div>
             <div className="block">
-              {" "}
+              
               <b>Title - </b> {data.title}{" "}
             </div>
             <div className="block">
